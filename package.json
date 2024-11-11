@@ -4,7 +4,9 @@
   "description": "A browser library to draw Gantt charts",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "repository": {
     "type": "git",
@@ -23,6 +25,13 @@
   },
   "homepage": "https://github.com/DmitryPorotov/gantt2#readme",
   "devDependencies": {
-    "typescript": "^5.6.3"
+    "@types/jest": "^29.5.14",
+    "html-webpack-plugin": "^5.6.3",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4"
   }
 }
