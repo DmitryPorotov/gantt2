@@ -43,19 +43,23 @@ export default class Grid {
     private calcForTask(t: Task) {
         let currentDay = t.start as Date;
         let duration = t.duration;
-        while (true) {
+        let daysToAdd = 0;
+        while (duration > 0) {
             if (!this.notches.has(currentDay.getTime())) {
                 this.notches.set(currentDay.getTime(), -1);
             }
-            if (duration > 0) {
-                currentDay = Utils.addDay(currentDay);
-                if (!this.isWeekendOrHoliday(currentDay) || duration === 1) duration--;
+            let nextDay = Utils.addDay(currentDay);
+            if (!this.notches.has(nextDay.getTime())) {
+                this.notches.set(nextDay.getTime(), -1);
             }
+            if (this.isWeekendOrHoliday(currentDay))
+                daysToAdd++;
             else {
-                t.end = currentDay;
-                break;
+                duration--;
             }
+            currentDay = Utils.addDay(currentDay);
         }
+        t.end = Utils.addDay(t.start as Date, t.duration + daysToAdd)
     }
 
     isWeekendOrHoliday(date: Date) {

@@ -1,6 +1,6 @@
 {
   "name": "gantt2",
-  "version": "1.0.3",
+  "version": "1.0.5",
   "description": "A browser library to draw Gantt charts",
   "main": "prod/index.js",
   "scripts": {

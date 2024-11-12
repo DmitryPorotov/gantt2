@@ -78,7 +78,7 @@ export default class SvgTask {
             const title = Utils.createElement("title") as unknown as SVGTitleElement;
             title.innerHTML = `${this.task.name}
    Starts ${this.task.start.toLocaleString()}
-   Ends ${this.task.end.toLocaleString()}
+   Ends ${Utils.addDay(this.task.end, -1).toLocaleString()}
    Duration ${this.task.duration} work day(s)`;
             this.elem.appChild_(title)
         }
