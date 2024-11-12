@@ -7,7 +7,7 @@
 <body>
 <script type="application/javascript">
     window.addEventListener('load', function () {
-        const chart = new Gantt2.Gantt2(document.getElementById('chart'));
+        const chart = new gantt2.Gantt2(document.getElementById('chart'));
         chart.init([
             {
                 id: 0,
@@ -181,7 +181,7 @@
                 depend: [
                     {
                         id: 46,
-                        type: 2,
+                        type: 1,
                         difference: 6,
                         hardness: 'Strong'
                     }
@@ -198,7 +198,13 @@
             },
         ],{
             showTaskNames: true,
-            taskStrokeWidth: 2
+            taskStrokeWidth: 1,
+            taskHeight: 20,
+            taskVPadding: 10,
+            addTaskTitles: true,
+            taskBorderRadius: 0,
+            showGrid: true,
+            showLegends: true
         });
     })
 </script>

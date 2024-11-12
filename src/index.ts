@@ -4,9 +4,10 @@ import {IConfig} from "./config/config.interface";
 import SvgRoot from "./draw/svg/svg-root";
 import DataParser from "./data/data-parser";
 import Grid from "./draw/grid";
+import SvgLegends from "./draw/svg/svg-legends";
 
 export class Gantt2 {
-    constructor(public elem: HTMLElement) {
+    constructor(private elem: HTMLElement) {
 
     }
 
@@ -20,8 +21,12 @@ export class Gantt2 {
         const svgRoot = new SvgRoot(grid, parsedConfig);
         const svg = svgRoot.buildElem(parsedData);
         svg.setAttrib_("width", String(grid.fullWidth + parsedConfig.taskStrokeWidth))
-            .setAttrib_('height', String(height + parsedConfig.taskStrokeWidth) );
-
+            .setAttrib_('height', String(height + parsedConfig.taskStrokeWidth))
+            .setAttrib_('style', 'display:block;');
+        if (parsedConfig.showLegends) {
+            const legends = new SvgLegends(grid, parsedConfig);
+            this.elem.appendChild(legends.buildElem().setAttrib_('style', 'display:block;').element)
+        }
         this.elem.appendChild(svg.element)
     }
 }

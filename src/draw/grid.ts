@@ -13,11 +13,12 @@ export default class Grid {
 
     calcNotches() {
         this.calcNotchesForTasks(this.parsedData.tasks);
-        const sortedKeys: number[] = [];
+        let sortedKeys: number[] = [];
         for (const k of this.notches.keys()) {
             sortedKeys.push(k);
         }
-        Array.prototype.sort.call(sortedKeys);
+        sortedKeys.sort();
+        sortedKeys = this.addMissingNotches(sortedKeys);
         this.notches.set(sortedKeys[0], 1);
         for (let i = 0; i < sortedKeys.length - 1; i++) {
             if (this.isWeekendOrHoliday(new Date(sortedKeys[i]))) {
@@ -48,7 +49,7 @@ export default class Grid {
             }
             if (duration > 0) {
                 currentDay = Utils.addDay(currentDay);
-                if (!this.isWeekendOrHoliday(currentDay)) duration--;
+                if (!this.isWeekendOrHoliday(currentDay) || duration === 1) duration--;
             }
             else {
                 t.end = currentDay;
@@ -57,7 +58,7 @@ export default class Grid {
         }
     }
 
-    private isWeekendOrHoliday(date: Date) {
+    isWeekendOrHoliday(date: Date) {
         for (const d of this.conf.weekEnds) {
             if (d === date.getDay()) return true;
         }
@@ -70,5 +71,18 @@ export default class Grid {
                 this._holidays.set((new Date(date)).getTime(), holidays[date]);
             }
         }
+    }
+
+    private addMissingNotches(sortedKeys: number[]): number[] {
+        const start = sortedKeys[0];
+        const end = sortedKeys[sortedKeys.length - 1];
+        const retVal: number[] = [start];
+        let current = new Date(start);
+        do {
+             current = Utils.addDay(current);
+             retVal.push(current.getTime());
+        }
+        while (current.getTime() < end);
+        return retVal;
     }
 }

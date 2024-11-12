@@ -27,6 +27,6 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
         libraryTarget: "window",
-        library: "Gantt2",
+        library: "gantt2",
     },
 };

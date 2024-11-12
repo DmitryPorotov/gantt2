@@ -16,7 +16,36 @@ export default class ConfigParser {
             weekEnds: cfg?.weekEnds || [0, 6],
             taskHolidayWidth: cfg?.taskHolidayWidth ?? 4,
             holidays: cfg?.holidays || {},
+            addTaskTitles: cfg?.addTaskTitles ?? true,
+            taskBorderRadius: this._parseTaskBorderRadius(cfg?.taskBorderRadius),
+            showGrid: cfg?.showGrid ?? true,
+            showLegends: cfg?.showLegends ?? true,
+            gridOpacity: cfg?.gridOpacity || 1
         }
+    }
+
+    private static _parseTaskBorderRadius(tbr?: number | number[]): number[] | number {
+        if (tbr == null) {
+            return 0;
+        }
+        else if (Array.isArray(tbr)) {
+            if (tbr.length < 2) {
+                throw new Error("taskBorderRadius array should have at least 2 elements");
+            }
+            else if (tbr.length == 2) {
+                return [tbr[0], tbr[0],tbr[1],tbr[1]];
+            }
+            else if (tbr.length == 3) {
+                return [tbr[0], tbr[1],tbr[2], 0];
+            }
+            else if (tbr.length > 3) {
+                return [tbr[0], tbr[1],tbr[2], tbr[3]];
+            }
+        }
+        else {
+            return [tbr, tbr, tbr, tbr]
+        }
+        throw new Error("Can't parse taskBorderRadius");
     }
 }
 

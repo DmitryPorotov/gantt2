@@ -1,6 +1,6 @@
 import SVGElementWrapper from "./svg-element-wrapper";
 
-export type SvgElementName = "svg" | "g" | "text" | "path";
+export type SvgElementName = "svg" | "g" | "text" | "path" | "title";
 
 export default class Utils {
     public static SVG_NS: 'http://www.w3.org/2000/svg' = 'http://www.w3.org/2000/svg';

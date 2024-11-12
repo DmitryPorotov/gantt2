@@ -5,13 +5,17 @@ import {ParsedData} from "../../data/data-parser";
 import SvgTask from "./svg-task";
 import {Config} from "../../config/config-parser";
 import Grid from "../grid";
-import {IDependency} from "../../data/dependency.interface";
+import Dependency from "../../data/dependency";
+import SvgDependency from "./svg-dependency";
+import SvgGrid from "./svg-grid";
 
 export default class SvgRoot {
     private elem?: SVGElementWrapper;
-    private tasks: SvgTask[] = [];
+    private svgTasks: SvgTask[] = [];
+    private svgGrid?: SvgGrid;
     private currentOffsetY: number = 0;
     private startDate?: Date;
+    private depsToDraw: {parent: SvgTask, dep: Dependency}[] = [];
     constructor(private grid: Grid,private conf: Config) {
         this.currentOffsetY = conf.taskVPadding * (conf.showTaskNames ? 2 : 1);
     }
@@ -19,6 +23,8 @@ export default class SvgRoot {
         this.elem = Utils.createElement("svg");
         this.startDate = data.startDate;
         this.drawTasks(data.tasks);
+        this.drawDependencies();
+        this.drawGrid();
         return this.elem;
     }
 
@@ -31,17 +37,41 @@ export default class SvgRoot {
             svgTask.setEndX(endX);
             this.elem?.appChild_(svgTask.buildElem(this.conf));
             this.currentOffsetY += this.conf.taskHeight + (2 * this.conf.taskVPadding);
-            this.tasks.push(svgTask);
+            this.svgTasks.push(svgTask);
             if (t.tasks?.length) {
                 this.drawTasks(t.tasks as Task[]);
             }
             if (t.depend?.length) {
-                this.drawDependencies(t.depend)
+                for (const d of t.depend) {
+                    this.depsToDraw.push({
+                        dep: d,
+                        parent: svgTask
+                    })
+                }
             }
         }
     }
 
-    private drawDependencies(depend: IDependency[]) {
+    private drawDependencies() {
+        for (const dp of this.depsToDraw) {
+            const dep = new SvgDependency(dp.dep, this.findSvgTaskById(dp.dep.id));
+            this.elem?.appChild_(dep.buildElem(dp.parent, this.conf));
+        }
+    }
 
+    private findSvgTaskById (id: number): SvgTask {
+        for (const t of this.svgTasks) {
+            if (t.getId() === id) {
+                return t;
+            }
+        }
+        throw new Error(`Task with id ${id} was not found.`);
+    }
+
+    private drawGrid() {
+        if (!this.conf.showGrid) return;
+        const height = this.svgTasks.length * (this.conf.taskHeight + (2 * (this.conf.taskVPadding)));
+        this.svgGrid = new SvgGrid(this.grid, height);
+        this.elem?.prepChild_(this.svgGrid.buildElem(this.conf));
     }
 }

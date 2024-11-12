@@ -173,7 +173,7 @@ export const tasks2: ITask[] = [
         depend: [
             {
                 id: 46,
-                type: 2,
+                type: 1,
                 difference: 6,
                 hardness: 'Strong'
             }
