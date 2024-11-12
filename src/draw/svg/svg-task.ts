@@ -38,7 +38,7 @@ export default class SvgTask {
     }
 
     buildElem(conf: Config): SVGElementWrapper {
-        this.elem = Utils.createElement("g").setAttrib_('class', 'gantt-task');
+        this.elem = Utils.createElement("g").setAttrib_('class', conf.taskCssClass);
         const task = Utils.createElement('path')
             .setAttrib_('fill', this.task.color);
         let completion;

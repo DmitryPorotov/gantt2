@@ -1,5 +1,6 @@
 import {Gantt2} from '../src'
 import {ITask} from "../src/data/task.interface";
+import {IConfig} from "../src/config/config.interface";
 
 const elem = document.getElementById('chart1');
 const gantt = new Gantt2(elem as HTMLElement);
@@ -168,3 +169,17 @@ const data: ITask[] = [
 ];
 
 gantt.init(data);
+
+const elem2 = document.getElementById('chart2');
+const gantt2 = new Gantt2(elem2 as HTMLElement);
+const config: IConfig = {
+    gridOpacity: .3,
+    taskBorderRadius: [5,10,10,5],
+    taskDefaultColor: 'purple',
+    taskHeight: 20,
+    taskDayWidth: 60,
+    taskVPadding: 10,
+    taskStrokeWidth: 2
+};
+
+gantt2.init(data, config);

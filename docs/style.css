@@ -2,3 +2,16 @@
     width: 1200px;
     margin: 0 auto;
 }
+code {
+    background: #fff0f0;
+    padding: .15rem;
+    border-radius: .1rem;
+    border: 1px #ccc solid ;
+}
+li {
+    line-height: 1.5rem;
+}
+
+.chart {
+    padding: 2rem .5rem;
+}

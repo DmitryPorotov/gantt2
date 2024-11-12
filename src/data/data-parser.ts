@@ -20,6 +20,7 @@ export default class DataParser {
     }
 
     static parse(tasks: ITask[]): ParsedData {
+        DataParser._totalTasks = 0;
         const {tasks: t} = DataParser._parseTasks(tasks);
         return {
             startDate: this._startDate,
