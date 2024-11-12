@@ -13,7 +13,7 @@ export interface ParsedData {
 export default class DataParser {
     private static _config: Config;
     private static _totalTasks: number = 0;
-    private static _startDate: Date;
+    private static _startDate?: Date;
 
     static setConfig(config: Config) {
         DataParser._config = config;
@@ -21,9 +21,10 @@ export default class DataParser {
 
     static parse(tasks: ITask[]): ParsedData {
         DataParser._totalTasks = 0;
+        DataParser._startDate = undefined;
         const {tasks: t} = DataParser._parseTasks(tasks);
         return {
-            startDate: this._startDate,
+            startDate: this._startDate as Date,
             tasks: t,
             total: this._totalTasks
         };
