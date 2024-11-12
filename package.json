@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
     "watch": "webpack --watch",
-    "build:prod": "webpack -c npm.webpack.config.js"
+    "build:prod": "webpack -c npm.webpack.config.js",
+    "build:docs": "webpack -c gh-page.webpack.config.js"
   },
   "repository": {
     "type": "git",

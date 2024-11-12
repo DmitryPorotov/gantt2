@@ -1,4 +1,53 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><title>Gantt2 - a Gannt chart library</title><link rel="stylesheet" href="style.css"></head><body><section class="container"><h1>Gantt2</h1><h2>Data format</h2><div><h3>Task object</h3><ul><li><code>id: number</code><span> - id of the task</span></li><li><code>name: string</code><span> - name of the task</span></li><li><code>[complete: number]</code><span> - percentage of completion the task</span></li><li><code>[color: string]</code><span> - CSS color of the task</span></li><li><code>start: string</code><span> - start date of the task in <code>YYYY-MM-DD</code> format</span></li><li><code>duration: number</code><span> - duration of the task in days</span></li><li><code>tasks: ITask[]</code><span> - an array of sub tasks</span></li><li><code>depend: IDependency[]</code><span> - an array of dependencies</span></li></ul></div><div><h3>Dependency object</h3><ul><li><code>id: number</code><span> - id of the task</span></li><li><code>type: number | DependencyType</code><span> - dependency type</span></li><li><code>difference: number</code><span> - an offset in days from the parent task</span></li><li><code>hardness: string | HardnessType</code><span> - hardness type <code>Strong</code> or <code>Rubber</code> (shown with dashes)</span></li></ul></div><div><h3>DependencyType enum</h3><ul><li><code>StartStart: 1</code><span> - parent and dependant task should start together</span></li><li><code>FinishStart: 2</code><span> - dependant task should start after parent task ends</span></li><li><code>FinishFinish: 3</code><span> - parent and dependant tasks should finish together</span></li><li><code>StartFinish: 4</code><span> - parent task should start after dependant task ends</span></li></ul><h3>HardnessType enum</h3><ul><li><code>Rubber</code><span> - shown as a solid line with an arrow</span></li><li><code>Strong</code><span> - shown as a dashed line with an arrow</span></li></ul></div><div><h2>Example data</h2><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">const</span> data: <span style="color: #333399; font-weight: bold">ITask</span>[] <span style="color: #333333">=</span> [
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gantt2 - a Gannt chart library</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+<section class="container">
+    <h1>Gantt2</h1>
+    <h2>Data format</h2>
+    <div>
+        <h3>Task object</h3>
+        <ul>
+            <li><code>id: number</code><span> - id of the task</span></li>
+            <li><code>name: string</code><span> - name of the task</span></li>
+            <li><code>[complete: number]</code><span> - percentage of completion the task</span></li>
+            <li><code>[color: string]</code><span> - CSS color of the task</span></li>
+            <li><code>start: string</code><span> - start date of the task in <code>YYYY-MM-DD</code> format</span></li>
+            <li><code>duration: number</code><span> - duration of the task in days</span></li>
+            <li><code>tasks: ITask[]</code><span> - an array of sub tasks</span></li>
+            <li><code>depend: IDependency[]</code><span> - an array of dependencies</span></li>
+        </ul>
+    </div>
+    <div>
+        <h3>Dependency object</h3>
+        <ul>
+            <li><code>id: number</code><span> - id of the task</span></li>
+            <li><code>type: number | DependencyType</code><span> - dependency type</span></li>
+            <li><code>difference: number</code><span> - an offset in days from the parent task</span></li>
+            <li><code>hardness: string | HardnessType</code><span> - hardness type <code>Strong</code> or <code>Rubber</code> (shown with dashes)</span></li>
+        </ul>
+    </div>
+    <div>
+        <h3>DependencyType enum</h3>
+        <ul>
+            <li><code>StartStart: 1</code><span> - parent and dependant task should start together</span></li>
+            <li><code>FinishStart: 2</code><span> - dependant task should start after parent task ends</span></li>
+            <li><code>FinishFinish: 3</code><span> - parent and dependant tasks should finish together</span></li>
+            <li><code>StartFinish: 4</code><span> - parent task should start after dependant task ends</span></li>
+        </ul>
+        <h3>HardnessType enum</h3>
+        <ul>
+            <li><code>Rubber</code><span> - shown as a solid line with an arrow</span></li>
+            <li><code>Strong</code><span> - shown as a dashed line with an arrow</span></li>
+        </ul>
+    </div>
+    <div>
+        <h2>Example data</h2>
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">const</span> data: <span style="color: #333399; font-weight: bold">ITask</span>[] <span style="color: #333333">=</span> [
     {
         id: <span style="color: #333399; font-weight: bold">0</span>,
         name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;do things&#39;</span>,
@@ -161,10 +210,23 @@
         duration: <span style="color: #333399; font-weight: bold">1</span>
     },
 ];
-</pre></div></div><div><h3>Example usage</h3><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> {Gantt2} from <span style="background-color: #fff0f0">&#39;gantt2/prod&#39;</span>
+</pre></div>
+
+    </div>
+    <div>
+        <h3>Example usage</h3>
+        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> {Gantt2} from <span style="background-color: #fff0f0">&#39;gantt2/prod&#39;</span>
 <span style="color: #008800; font-weight: bold">import</span> {ITask} from <span style="background-color: #fff0f0">&quot;gantt2/prod/data/task.interface&quot;</span>;
 
 <span style="color: #008800; font-weight: bold">const</span> elem <span style="color: #333333">=</span> <span style="color: #007020">document</span>.getElementById(<span style="background-color: #fff0f0">&#39;chart&#39;</span>);
 <span style="color: #008800; font-weight: bold">const</span> gantt <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> Gantt2(elem <span style="color: #008800; font-weight: bold">as</span> HTMLElement);
 gantt.init(data);
-</pre></div></div><div id="chart1"></div></section><script src="bundle.js"></script></body></html>
+</pre></div>
+
+    </div>
+    <div id="chart1">
+
+    </div>
+</section>
+</body>
+</html>

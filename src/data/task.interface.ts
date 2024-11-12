@@ -6,7 +6,7 @@ export interface ITask {
     complete?: number;
     color?: string;
     meeting?: boolean;
-    expand: boolean;
+    expand?: boolean;
     start: Date | string;
     duration: number;
     tasks?: ITask[];
