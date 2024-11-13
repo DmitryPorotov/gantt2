@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = {
     mode: "production",
     devtool: 'inline-source-map',
-    entry: './src/index.ts',
+    entry: './tests/dev-index.ts',
     module: {
         rules: [
             {
@@ -26,7 +26,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
-        libraryTarget: "window",
+        libraryTarget: "umd",
         library: "gantt2",
     },
 };

@@ -14,11 +14,15 @@ export default class SvgLegends {
             const date = new Date(d);
             if (date.getDate() == 1) {
                 monthStarts.push({
-                    x: this.grid.notches.get(d) as number,
+                    x: date.getTime(),
                     date
                 })
             }
-            if (!this.grid.isWeekendOrHoliday(date)) {
+            if (
+                (this.conf.timelineDayNumbersForWeekdays && this.conf.timelineDayNumbersForWeekdays.includes(date.getDay()))
+                || (this.conf.timelineDayNumbersForMonthDates && this.conf.timelineDayNumbersForMonthDates.includes(date.getDate()))
+                || (!this.conf.timelineDayNumbersForWeekdays && !this.conf.timelineDayNumbersForMonthDates && !this.grid.isWeekendOrHoliday(date))
+            ) {
                 const text = Utils.createElement('text')
                     .setAttrib_('x', String(this.grid.notches.get(d)))
                     .setAttrib_('y', `${this.conf.timelineLegendHeight - 10}`) as unknown as SVGTextElement;

@@ -23,4 +23,6 @@ export interface IConfig {
     dependencyArrowSize?: number
     timelineLegendCssClass?: string
     timelineLegendHeight?: number
+    timelineDayNumbersForWeekdays?: number[] | null
+    timelineDayNumbersForMonthDates?: number[] | null
 }

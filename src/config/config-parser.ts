@@ -4,6 +4,8 @@ export type Config = {[key in keyof IConfig]-? : IConfig[key]}
 
 export default class ConfigParser {
     static parse(cfg?: IConfig): Config {
+        if (cfg && cfg.timelineDayNumbersForMonthDates && cfg.timelineDayNumbersForWeekdays)
+            throw new Error("Either timelineDayNumbersForMonthDates or timelineDayNumbersForWeekdays can be defined.");
         return {
             taskDefaultColor: cfg?.taskDefaultColor || '#8cb6ce',
             showTaskNames: cfg?.showTaskNames ?? true,
@@ -29,6 +31,8 @@ export default class ConfigParser {
             dependencyArrowSize: cfg?.dependencyArrowSize ?? 5,
             timelineLegendCssClass: cfg?.timelineLegendCssClass || 'gantt-timeline-legend',
             timelineLegendHeight: cfg?.timelineLegendHeight || 40,
+            timelineDayNumbersForWeekdays: cfg?.timelineDayNumbersForWeekdays || null,
+            timelineDayNumbersForMonthDates: cfg?.timelineDayNumbersForMonthDates || null
         }
     }
 

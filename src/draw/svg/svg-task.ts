@@ -79,7 +79,8 @@ export default class SvgTask {
             title.innerHTML = `${this.task.name}
    Starts ${this.task.start.toLocaleString()}
    Ends ${Utils.addDay(this.task.end, -1).toLocaleString()}
-   Duration ${this.task.duration} work day(s)`;
+   Duration ${this.task.duration} work day(s)
+   Complete ${this.task.complete || 0}%`;
             this.elem.appChild_(title)
         }
         if (completion) {

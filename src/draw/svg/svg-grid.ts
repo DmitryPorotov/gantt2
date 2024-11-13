@@ -18,9 +18,15 @@ export default class SvgGrid {
                     .setAttrib_('d', `M${x} 0v${this.totalHeight}h${conf.taskHolidayWidth}v${-this.totalHeight}z`)
             }
             else {
-                line.setAttrib_('d', `M${x} 0L${x} ${this.totalHeight}`)
-                .setAttrib_('stroke', conf.gridLineColor)
-                .setAttrib_('stroke-width', '1');
+                if (
+                    (conf.timelineDayNumbersForWeekdays && conf.timelineDayNumbersForWeekdays.includes(date.getDay()))
+                    || (conf.timelineDayNumbersForMonthDates && conf.timelineDayNumbersForMonthDates.includes(date.getDate()))
+                    || !(conf.timelineDayNumbersForWeekdays || conf.timelineDayNumbersForMonthDates)
+                ) {
+                    line.setAttrib_('d', `M${x} 0L${x} ${this.totalHeight}`)
+                        .setAttrib_('stroke', conf.gridLineColor)
+                        .setAttrib_('stroke-width', '1');
+                }
             }
             this.elem.appChild_(line);
         }
