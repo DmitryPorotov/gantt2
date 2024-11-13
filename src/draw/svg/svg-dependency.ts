@@ -42,30 +42,36 @@ export default class SvgDependency {
             .appChild_(
                 line = Utils.createElement('path')
                     .setAttrib_('stroke', '#000')
-                    .setAttrib_('stroke-width', '1')
+                    .setAttrib_('stroke-width', String(conf.dependencyStrokeWidth))
                     .setAttrib_('fill-opacity', '0')
             )
             .appChild_(
                 arrowHead = Utils.createElement('path')
                     .setAttrib_('stroke', '#000')
                     .setAttrib_('stroke-width', '1')
-            ).setAttrib_('class', 'gantt-task-dependency');
+            ).setAttrib_('class', conf.dependencyCssClass);
+
+        if (conf.dependencyOpacity !== 1) {
+            arrowG.setAttrib_('opacity', String(conf.dependencyOpacity))
+        }
 
         if ('Rubber' === this.dependency.hardness) {
             line.setAttrib_('stroke-dasharray', '5, 5');
         }
 
+        const arrowSize = conf.dependencyArrowSize;
+        const halfArrowSize = arrowSize / 2 + 1;
         let lineD = `M${startX} ${parentOffsetY + (conf.taskHeight / 2)}`,
             arrowHeadD: string,
             realEndX: number,
             realEndY: number,
             dir: number;
         if (doHook) {
-            realEndX = endX + (this.dependency.type === DependencyType.StartStart ? -6 : 6);
+            realEndX = endX + (this.dependency.type === DependencyType.StartStart ? -arrowSize : arrowSize);
             realEndY = dependOnOffsetY + (conf.taskHeight / 2);
             dir = this.dependency.type === DependencyType.StartStart ? 1 : -1;
-            lineD += `h${this.dependency.type === DependencyType.StartStart ? -8 : 8}V${realEndY}H${realEndX}`;
-            arrowHeadD = `v-3l${5 * dir} 3l${-5 * dir} 3z`;
+            lineD += `h${this.dependency.type === DependencyType.StartStart ? -(arrowSize + 2) : arrowSize + 2}V${realEndY}H${realEndX}`;
+            arrowHeadD = `v-${halfArrowSize}l${arrowSize * dir} ${halfArrowSize}l${-arrowSize * dir} ${halfArrowSize}z`;
         } else {
             realEndX = endX + (
                 (
@@ -76,11 +82,11 @@ export default class SvgDependency {
                             || this.dependency.type === DependencyType.FinishStart
                         )
                     )
-                ) ? 3 : -3);
-            realEndY = dependOnOffsetY  + (dependOnOffsetY < parentOffsetY ? conf.taskHeight + conf.taskVPadding : -conf.taskVPadding);
+                ) ? arrowSize : -arrowSize);
+            realEndY = dependOnOffsetY  + (dependOnOffsetY < parentOffsetY ? conf.taskHeight + conf.taskVPadding  + halfArrowSize: -(conf.taskVPadding + halfArrowSize));
             dir = dependOnOffsetY > parentOffsetY ? 1 : -1;
             lineD += `H${realEndX} V${realEndY}`;
-            arrowHeadD = `h3l-3 ${5 * dir}l-3 ${-5 * dir}z`;
+            arrowHeadD = `h${halfArrowSize}l-${halfArrowSize} ${arrowSize * dir}l-${halfArrowSize} ${-arrowSize * dir}z`;
         }
         arrowHeadD = `M${realEndX} ${realEndY}` + arrowHeadD;
         line.setAttrib_('d', lineD);

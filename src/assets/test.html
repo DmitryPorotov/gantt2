@@ -5,6 +5,12 @@
     <title>Title</title>
 </head>
 <body>
+<style type="text/css">
+    svg text {
+        font-family: Helvetica;
+        font-size: 1.5rem;
+    }
+</style>
 <script type="application/javascript">
     window.addEventListener('load', function () {
         const chart = new gantt2.Gantt2(document.getElementById('chart'));
@@ -199,13 +205,18 @@
         ],{
             showTaskNames: true,
             taskStrokeWidth: 1,
-            taskHeight: 20,
-            taskVPadding: 10,
+            taskHeight: 30,
+            taskDayWidth: 100,
+            taskVPadding: 15,
             addTaskTitles: true,
             taskBorderRadius: 0,
             showGrid: true,
             showLegends: true,
             // weekEnds: [0]
+            dependencyOpacity: .4,
+            dependencyStrokeWidth: 2,
+            dependencyArrowSize: 12,
+            timelineLegendHeight: 60
         });
     })
 </script>

@@ -20,11 +20,12 @@ export class Gantt2 {
         grid.calcNotches();
         const svgRoot = new SvgRoot(grid, parsedConfig);
         const svg = svgRoot.buildElem(parsedData);
-        svg.setAttrib_("width", String(grid.fullWidth + parsedConfig.taskStrokeWidth))
+        const width = grid.fullWidth + (parsedConfig.taskDayWidth / 2);
+        svg.setAttrib_("width", String(width))
             .setAttrib_('height', String(height + parsedConfig.taskStrokeWidth))
             .setAttrib_('style', 'display:block;');
         if (parsedConfig.showLegends) {
-            const legends = new SvgLegends(grid, parsedConfig);
+            const legends = new SvgLegends(grid, width, parsedConfig);
             this.elem.appendChild(legends.buildElem().setAttrib_('style', 'display:block;').element)
         }
         this.elem.appendChild(svg.element)

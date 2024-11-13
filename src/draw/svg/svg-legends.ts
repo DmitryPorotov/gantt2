@@ -5,7 +5,7 @@ import Utils from "./utils/utils";
 
 export default class SvgLegends {
     elem: SVGElementWrapper;
-    constructor(private grid: Grid, private conf: Config) {
+    constructor(private grid: Grid, private width: number, private conf: Config) {
         this.elem = Utils.createElement('svg');
     }
     buildElem(): SVGElementWrapper {
@@ -21,7 +21,7 @@ export default class SvgLegends {
             if (!this.grid.isWeekendOrHoliday(date)) {
                 const text = Utils.createElement('text')
                     .setAttrib_('x', String(this.grid.notches.get(d)))
-                    .setAttrib_('y', '30') as unknown as SVGTextElement;
+                    .setAttrib_('y', `${this.conf.timelineLegendHeight - 10}`) as unknown as SVGTextElement;
                 text.innerHTML = String(date.getDate());
                 this.elem.appChild_(text);
             }
@@ -35,14 +35,17 @@ export default class SvgLegends {
             const key = [...this.grid.notches.keys()][0];
             this.buildMonthLegend(new Date(key), key);
         }
-        this.elem.setAttrib_('height', '40').setAttrib_('width', String(this.grid.fullWidth));
+        this.elem.setAttrib_('height', String(this.conf.timelineLegendHeight))
+            .setAttrib_('width', String(this.width))
+            .setAttrib_('class', this.conf.timelineLegendCssClass);
         return this.elem;
     }
 
     private buildMonthLegend(date: Date, x: number) {
         const text = Utils.createElement('text')
+            .setAttrib_('font-weight',"bold")
             .setAttrib_('x', String(this.grid.notches.get(x)))
-            .setAttrib_('y', '14') as unknown as SVGTextElement;
+            .setAttrib_('y', String(this.conf.timelineLegendHeight/3)) as unknown as SVGTextElement;
         text.innerHTML = `${date.getMonth() + 1}/${date.getFullYear()}`;
         this.elem.appChild_(text);
     }

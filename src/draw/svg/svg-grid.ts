@@ -14,12 +14,12 @@ export default class SvgGrid {
             const x = this.grid.notches.get(n);
             const line = Utils.createElement('path');
             if (this.grid.isWeekendOrHoliday(date)) {
-                line.setAttrib_('fill', '#ccc')
+                line.setAttrib_('fill', conf.gridHolidayColor)
                     .setAttrib_('d', `M${x} 0v${this.totalHeight}h${conf.taskHolidayWidth}v${-this.totalHeight}z`)
             }
             else {
                 line.setAttrib_('d', `M${x} 0L${x} ${this.totalHeight}`)
-                .setAttrib_('stroke', '#000')
+                .setAttrib_('stroke', conf.gridLineColor)
                 .setAttrib_('stroke-width', '1');
             }
             this.elem.appChild_(line);

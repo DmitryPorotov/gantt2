@@ -92,7 +92,7 @@ export default class SvgTask {
         const text: SVGTextElement = Utils.createElement('text')
             .setAttrib_('class', 'gantt-task-name')
             .setAttrib_('dx', String(this.offsetX))
-            .setAttrib_('dy', String(this.offsetY -2)) as unknown as SVGTextElement;
+            .setAttrib_('dy', String(this.offsetY -4)) as unknown as SVGTextElement;
         text.innerHTML = this.task.name;
         this.elem?.appChild_(text);
     }

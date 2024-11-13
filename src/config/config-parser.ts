@@ -20,7 +20,15 @@ export default class ConfigParser {
             taskBorderRadius: this._parseTaskBorderRadius(cfg?.taskBorderRadius),
             showGrid: cfg?.showGrid ?? true,
             showLegends: cfg?.showLegends ?? true,
-            gridOpacity: cfg?.gridOpacity || 1
+            gridOpacity: cfg?.gridOpacity || 1,
+            gridHolidayColor: cfg?.gridHolidayColor || '#ccc',
+            gridLineColor: cfg?.gridLineColor || 'black',
+            dependencyCssClass: cfg?.dependencyCssClass || 'gantt-task-dependency',
+            dependencyOpacity: cfg?.dependencyOpacity ?? 1,
+            dependencyStrokeWidth: cfg?.dependencyStrokeWidth ?? 1,
+            dependencyArrowSize: cfg?.dependencyArrowSize ?? 5,
+            timelineLegendCssClass: cfg?.timelineLegendCssClass || 'gantt-timeline-legend',
+            timelineLegendHeight: cfg?.timelineLegendHeight || 40,
         }
     }
 
