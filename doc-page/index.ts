@@ -2,6 +2,18 @@ import {Gantt2} from '../src'
 import {ITask} from "../src/data/task.interface";
 import {IConfig} from "../src/config/config.interface";
 
+const navs = window.document.querySelectorAll('a[href^="#"]');
+for (const n of navs) {
+    n.addEventListener('click', (evt) => {
+        evt.preventDefault();
+        evt.stopPropagation();
+        const el = evt.target as HTMLAnchorElement;
+        const id = el.href.split('#')[1];
+        const navTarget = window.document.getElementById(id);
+        if (navTarget) navTarget.scrollIntoView({ behavior: "smooth", inline: "nearest" });
+    })
+}
+
 const elem = document.getElementById('chart1');
 const gantt = new Gantt2(elem as HTMLElement);
 const data: ITask[] = [

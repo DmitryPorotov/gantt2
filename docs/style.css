@@ -1,6 +1,16 @@
+body  * {
+    font-family: Helvetica;
+}
+header {
+    border-bottom: 1px solid #ccc;
+    position: sticky;
+    top: 0;
+    background: #f0f0f0;
+}
 .container {
     width: 1200px;
     margin: 0 auto;
+    padding: .5rem 0 .5rem 0;
 }
 code {
     background: #fff0f0;
@@ -9,9 +19,41 @@ code {
     border: 1px #ccc solid ;
 }
 li {
-    line-height: 1.5rem;
+    line-height: 1.75rem;
 }
 
 .chart {
     padding: 2rem .5rem;
+}
+
+.links a {
+    display: inline-block;
+    padding: .5rem 1rem .5rem 0;
+}
+
+.bg-light {
+    background-color: #f3f3f3;
+}
+
+footer {
+    border-top: 1px solid #ccc;
+    background: #f0f0f0;
+    position: sticky;
+    bottom: 0;
+}
+
+.footer-content {
+    display: inline-block;
+    padding-right: 1rem;
+}
+
+.nav-to {
+    scroll-margin-top: 85px;
+}
+.header-content {
+    display: inline-block;
+    padding-right: 1rem;
+}
+nav a {
+    padding-right: 1rem;
 }

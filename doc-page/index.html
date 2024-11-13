@@ -6,52 +6,80 @@
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body>
-<section class="container">
-    <h1>Gantt2</h1>
-    <a href="https://github.com/DmitryPorotov/gantt2" target="_blank"><h3>Git page</h3></a>
-    <a href="https://www.npmjs.com/package/gantt2" target="_blank"><h3>NPM page</h3></a>
-    <h2>Installation</h2>
-    <code>npm i gantt2</code>
-    <h2>Data format</h2>
-    <div>
-        <h3>Task object</h3>
-        <ul>
-            <li><code>id: number</code><span> - id of the task</span></li>
-            <li><code>name: string</code><span> - name of the task</span></li>
-            <li><code>[complete: number]</code><span> - percentage of completion the task</span></li>
-            <li><code>[color: string]</code><span> - CSS color of the task</span></li>
-            <li><code>start: string</code><span> - start date of the task in <code>YYYY-MM-DD</code> format</span></li>
-            <li><code>duration: number</code><span> - duration of the task in days</span></li>
-            <li><code>tasks: ITask[]</code><span> - an array of sub tasks</span></li>
-            <li><code>depend: IDependency[]</code><span> - an array of dependencies</span></li>
-        </ul>
-    </div>
-    <div>
-        <h3>Dependency object</h3>
-        <ul>
-            <li><code>id: number</code><span> - id of the task</span></li>
-            <li><code>type: number | DependencyType</code><span> - dependency type</span></li>
-            <li><code>difference: number</code><span> - an offset in days from the parent task</span></li>
-            <li><code>hardness: string | HardnessType</code><span> - hardness type <code>Strong</code> or <code>Rubber</code> (shown with dashes)</span></li>
-        </ul>
-    </div>
-    <div>
-        <h3>DependencyType enum</h3>
-        <ul>
-            <li><code>StartStart: 1</code><span> - parent and dependant task should start together</span></li>
-            <li><code>FinishStart: 2</code><span> - dependant task should start after parent task ends</span></li>
-            <li><code>FinishFinish: 3</code><span> - parent and dependant tasks should finish together</span></li>
-            <li><code>StartFinish: 4</code><span> - parent task should start after dependant task ends</span></li>
-        </ul>
-        <h3>HardnessType enum</h3>
-        <ul>
-            <li><code>Rubber</code><span> - shown as a solid line with an arrow</span></li>
-            <li><code>Strong</code><span> - shown as a dashed line with an arrow</span></li>
-        </ul>
-    </div>
-    <div>
+<header>
+    <section class="container">
+        <div class="header-content">
+            <h1>Gantt2</h1>
+        </div>
+        <div class="header-content">
+            <nav>
+                <span><a href="#install">Installation</a></span>
+                <span><a href="#data-format">Data format</a></span>
+                <span><a href="#example-data">Example data</a></span>
+                <span><a href="#example-usage">Usage</a></span>
+                <span><a href="#config">Configuration</a></span>
+            </nav>
+        </div>
+    </section>
+</header>
+
+<section id="install" class="nav-to">
+    <section class="container">
+        <h2>Installation</h2>
+        <code>npm i gantt2</code>
+    </section>
+</section>
+<section class="bg-light nav-to" id="data-format">
+    <section class="container">
+        <h2>Data format</h2>
+        <div>
+            <h3>Task object</h3>
+            <ul>
+                <li><code>id: number</code><span> - id of the task</span></li>
+                <li><code>name: string</code><span> - name of the task</span></li>
+                <li><code>[complete: number]</code><span> - percentage of completion the task</span></li>
+                <li><code>[color: string]</code><span> - CSS color of the task</span></li>
+                <li><code>start: string</code><span> - start date of the task in <code>YYYY-MM-DD</code> format</span>
+                </li>
+                <li><code>duration: number</code><span> - duration of the task in days</span></li>
+                <li><code>tasks: ITask[]</code><span> - an array of sub tasks</span></li>
+                <li><code>depend: IDependency[]</code><span> - an array of dependencies</span></li>
+            </ul>
+        </div>
+        <div>
+            <h3>Dependency object</h3>
+            <ul>
+                <li><code>id: number</code><span> - id of the task</span></li>
+                <li><code>type: number | DependencyType</code><span> - dependency type</span></li>
+                <li><code>difference: number</code><span> - an offset in days from the parent task</span></li>
+                <li><code>hardness: string | HardnessType</code><span> - hardness type <code>Strong</code> or <code>Rubber</code> (shown with dashes)</span>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <h3>DependencyType enum</h3>
+            <ul>
+                <li><code>StartStart: 1</code><span> - parent and dependant task should start together</span></li>
+                <li><code>FinishStart: 2</code><span> - dependant task should start after parent task ends</span></li>
+                <li><code>FinishFinish: 3</code><span> - parent and dependant tasks should finish together</span></li>
+                <li><code>StartFinish: 4</code><span> - parent task should start after dependant task ends</span></li>
+            </ul>
+            <h3>HardnessType enum</h3>
+            <ul>
+                <li><code>Rubber</code><span> - shown as a solid line with an arrow</span></li>
+                <li><code>Strong</code><span> - shown as a dashed line with an arrow</span></li>
+            </ul>
+        </div>
+    </section>
+</section>
+
+<div id="example-data" class="nav-to">
+    <section class="container">
         <h2>Example data</h2>
-        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">const</span> data: <span style="color: #333399; font-weight: bold">ITask</span>[] <span style="color: #333333">=</span> [
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre
+                style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">const</span> data: <span
+                style="color: #333399; font-weight: bold">ITask</span>[] <span style="color: #333333">=</span> [
     {
         id: <span style="color: #333399; font-weight: bold">0</span>,
         name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;do things&#39;</span>,
@@ -62,9 +90,11 @@
             {
                 id: <span style="color: #333399; font-weight: bold">1</span>,
                 name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Do more things&#39;</span>,
-                color<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;#ff6666&#39;</span>,
+                color<span style="color: #333333">:</span> <span
+                    style="background-color: #fff0f0">&#39;#ff6666&#39;</span>,
                 complete: <span style="color: #333399; font-weight: bold">21</span>,
-                start<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;2018-02-02&#39;</span>,
+                start<span style="color: #333333">:</span> <span
+                    style="background-color: #fff0f0">&#39;2018-02-02&#39;</span>,
                 duration: <span style="color: #333399; font-weight: bold">2</span>,
                 depend<span style="color: #333333">:</span> [
                     {
@@ -83,10 +113,13 @@
             },
             {
                 id: <span style="color: #333399; font-weight: bold">2</span>,
-                name<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;task_2&#39;</span>,
+                name<span style="color: #333333">:</span> <span
+                    style="background-color: #fff0f0">&#39;task_2&#39;</span>,
                 complete: <span style="color: #333399; font-weight: bold">0</span>,
-                color<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;#8cb6ce&#39;</span>,
-                start<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;2018-02-06&#39;</span>,
+                color<span style="color: #333333">:</span> <span
+                    style="background-color: #fff0f0">&#39;#8cb6ce&#39;</span>,
+                start<span style="color: #333333">:</span> <span
+                    style="background-color: #fff0f0">&#39;2018-02-06&#39;</span>,
                 duration: <span style="color: #333399; font-weight: bold">2</span>,
                 tasks<span style="color: #333333">:</span> [
                     {
@@ -129,13 +162,15 @@
                 id: <span style="color: #333399; font-weight: bold">11</span>,
                 type: <span style="color: #333399; font-weight: bold">2</span>,
                 difference: <span style="color: #333399; font-weight: bold">0</span>,
-                hardness<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Strong&#39;</span>
+                hardness<span style="color: #333333">:</span> <span
+                    style="background-color: #fff0f0">&#39;Strong&#39;</span>
             },
             {
                 id: <span style="color: #333399; font-weight: bold">19</span>,
                 type: <span style="color: #333399; font-weight: bold">2</span>,
                 difference: <span style="color: #333399; font-weight: bold">2</span>,
-                hardness<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Strong&#39;</span>
+                hardness<span style="color: #333333">:</span> <span
+                    style="background-color: #fff0f0">&#39;Strong&#39;</span>
             }
         ]
     },
@@ -158,7 +193,8 @@
                 id: <span style="color: #333399; font-weight: bold">23</span>,
                 type: <span style="color: #333399; font-weight: bold">3</span>,
                 difference: <span style="color: #333399; font-weight: bold">0</span>,
-                hardness<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Strong&#39;</span>
+                hardness<span style="color: #333333">:</span> <span
+                    style="background-color: #fff0f0">&#39;Strong&#39;</span>
             }
         ]
     },
@@ -180,7 +216,8 @@
                 id: <span style="color: #333399; font-weight: bold">42</span>,
                 type: <span style="color: #333399; font-weight: bold">4</span>,
                 difference: <span style="color: #333399; font-weight: bold">0</span>,
-                hardness<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Strong&#39;</span>
+                hardness<span style="color: #333333">:</span> <span
+                    style="background-color: #fff0f0">&#39;Strong&#39;</span>
             }
         ]
     },
@@ -202,7 +239,8 @@
                 id: <span style="color: #333399; font-weight: bold">46</span>,
                 type: <span style="color: #333399; font-weight: bold">1</span>,
                 difference: <span style="color: #333399; font-weight: bold">6</span>,
-                hardness<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;Strong&#39;</span>
+                hardness<span style="color: #333333">:</span> <span
+                    style="background-color: #fff0f0">&#39;Strong&#39;</span>
             }
         ]
     },
@@ -214,56 +252,104 @@
         duration: <span style="color: #333399; font-weight: bold">1</span>
     },
 ];
-</pre></div>
+</pre>
+        </div>
+    </section>
+</div>
 
-    </div>
-    <div>
+
+<div class="bg-light nav-to"  id="example-usage" >
+    <section class="container">
         <h3>Example usage</h3>
-        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> {Gantt2} from <span style="background-color: #fff0f0">&#39;gantt2/prod&#39;</span>
+        <!-- HTML generated using hilite.me -->
+        <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre
+                style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">import</span> {Gantt2} from <span
+                style="background-color: #fff0f0">&#39;gantt2/prod&#39;</span>
 <span style="color: #008800; font-weight: bold">import</span> {ITask} from <span style="background-color: #fff0f0">&quot;gantt2/prod/data/task.interface&quot;</span>;
 
-<span style="color: #008800; font-weight: bold">const</span> elem <span style="color: #333333">=</span> <span style="color: #007020">document</span>.getElementById(<span style="background-color: #fff0f0">&#39;chart&#39;</span>);
-<span style="color: #008800; font-weight: bold">const</span> gantt <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> Gantt2(elem <span style="color: #008800; font-weight: bold">as</span> HTMLElement);
+<span style="color: #008800; font-weight: bold">const</span> elem <span style="color: #333333">=</span> <span
+                    style="color: #007020">document</span>.getElementById(<span style="background-color: #fff0f0">&#39;chart&#39;</span>);
+<span style="color: #008800; font-weight: bold">const</span> gantt <span style="color: #333333">=</span> <span
+                    style="color: #008800; font-weight: bold">new</span> Gantt2(elem <span
+                    style="color: #008800; font-weight: bold">as</span> HTMLElement);
 gantt.init(data);
-</pre></div>
+</pre>
+        </div>
+        <div class="chart" id="chart1">
 
-    </div>
-    <div class="chart" id="chart1">
-
-    </div>
-    <h2 id="config">Configuration</h2>
-    <div>
-        <h3>Config object</h3>
-        <ul>
-            <li><code>taskDefaultColor: string</code><span> - default fill color for tasks (default <code>#8cb6ce</code>)</span></li>
-            <li><code>showTaskNames: boolean</code><span> - whether to show task names (default <code>true</code>)</span></li>
-            <li><code>addTaskTitles: boolean</code><span> - whether to add <code>title</code> elements (tooltips) to tasks (default <code>true</code>)</span></li>
-            <li><code>taskCssClass: string</code><span> - a CSS class for tasks (default <code>gantt-task</code>)</span></li>
-            <li><code>taskDayWidth: number</code><span> - width of a work day in the chart (default <code>50</code>)</span></li>
-            <li><code>taskHolidayWidth: number</code><span> - width of a holiday or weekend in the chart (default <code>50</code>)</span></li>
-            <li><code>taskHeight: number</code><span> - height of tasks in the chart (default <code>15</code>)</span></li>
-            <li><code>taskVPadding: number</code><span> - vertical padding of tasks in the chart (default <code>8</code>)</span></li>
-            <li><code>taskStrokeWidth: number</code><span> - stroke (border) width of tasks in the chart (default <code>1</code>)</span></li>
-            <li><code>taskStrokeColor: string</code><span> - stroke color of tasks in the chart (default <code>black</code>)</span></li>
-            <li><code>weekEnds: number[]</code><span> - weekends array in JavaScript format i.e. Sunday is <code>0</code> (default <code>[0, 6]</code>)</span></li>
-            <li><code>holidays: {}</code><span>
+        </div>
+    </section>
+</div>
+<div id="config" class="nav-to">
+    <section class="container">
+        <h2>Configuration</h2>
+        <div>
+            <h3>Config object</h3>
+            <ul>
+                <li><code>taskDefaultColor:
+                    string</code><span> - default fill color for tasks (default <code>#8cb6ce</code>)</span></li>
+                <li><code>showTaskNames:
+                    boolean</code><span> - whether to show task names (default <code>true</code>)</span>
+                </li>
+                <li><code>addTaskTitles: boolean</code><span> - whether to add <code>title</code> elements (tooltips) to tasks (default <code>true</code>)</span>
+                </li>
+                <li><code>taskCssClass:
+                    string</code><span> - a CSS class for tasks (default <code>gantt-task</code>)</span>
+                </li>
+                <li><code>taskDayWidth: number</code><span> - width of a work day in the chart (default <code>50</code>)</span>
+                </li>
+                <li><code>taskHolidayWidth:
+                    number</code><span> - width of a holiday or weekend in the chart (default <code>50</code>)</span>
+                </li>
+                <li><code>taskHeight:
+                    number</code><span> - height of tasks in the chart (default <code>15</code>)</span></li>
+                <li><code>taskVPadding:
+                    number</code><span> - vertical padding of tasks in the chart (default <code>8</code>)</span></li>
+                <li><code>taskStrokeWidth:
+                    number</code><span> - stroke (border) width of tasks in the chart (default <code>1</code>)</span>
+                </li>
+                <li><code>taskStrokeColor:
+                    string</code><span> - stroke color of tasks in the chart (default <code>black</code>)</span>
+                </li>
+                <li><code>weekEnds:
+                    number[]</code><span> - weekends array in JavaScript format i.e. Sunday is <code>0</code> (default <code>[0, 6]</code>)</span>
+                </li>
+                <li><code>holidays: {}</code><span>
                 - a dictionary of holidays, the format is; key - is a <code>YYYY-MM-DD</code> string which represents the date of the holiday
                 and the value is the name of the holiday (default <code>{}</code>)
             </span></li>
-            <li><code>taskBorderRadius: number | number[]</code><span> - border radius for tasks, it's either a number or an array of numbers in CSS format (default <code>0</code>)</span></li>
-            <li><code>showGrid: boolean</code><span> - whether to show the dates grid (default <code>true</code>)</span></li>
-            <li><code>showLegends: boolean</code><span> - whether to show the legends with date numbers and months above the chart (default <code>true</code>)</span></li>
-            <li><code>gridOpacity: number</code><span> - grid opacity between 0 and 1 (default <code>1</code>)</span></li>
-        </ul>
-    </div>
-    <div>
-        <h2>Example with config</h2>
-        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-weight: bold">const</span> elem2 <span style="color: #333333">=</span> <span style="color: #007020">document</span>.getElementById(<span style="background-color: #fff0f0">&#39;chart2&#39;</span>);
-<span style="color: #008800; font-weight: bold">const</span> gantt2 <span style="color: #333333">=</span> <span style="color: #008800; font-weight: bold">new</span> Gantt2(elem2 <span style="color: #008800; font-weight: bold">as</span> HTMLElement);
-<span style="color: #008800; font-weight: bold">const</span> config: <span style="color: #333399; font-weight: bold">IConfig</span> <span style="color: #333333">=</span> {
+                <li><code>taskBorderRadius: number | number[]</code><span> - border radius for tasks, it's either a number or an array of numbers in CSS format (default <code>0</code>)</span>
+                </li>
+                <li><code>showGrid:
+                    boolean</code><span> - whether to show the dates grid (default <code>true</code>)</span>
+                </li>
+                <li><code>showLegends: boolean</code><span> - whether to show the legends with date numbers and months above the chart (default <code>true</code>)</span>
+                </li>
+                <li><code>gridOpacity:
+                    number</code><span> - grid opacity between 0 and 1 (default <code>1</code>)</span></li>
+            </ul>
+        </div>
+        <div>
+            <h2>Example with config</h2>
+            <!-- HTML generated using hilite.me -->
+            <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre
+                    style="margin: 0; line-height: 125%"><span
+                    style="color: #008800; font-weight: bold">const</span> elem2 <span
+                    style="color: #333333">=</span> <span
+                    style="color: #007020">document</span>.getElementById(<span style="background-color: #fff0f0">&#39;chart2&#39;</span>);
+<span style="color: #008800; font-weight: bold">const</span> gantt2 <span style="color: #333333">=</span> <span
+                        style="color: #008800; font-weight: bold">new</span> Gantt2(elem2 <span
+                        style="color: #008800; font-weight: bold">as</span> HTMLElement);
+<span style="color: #008800; font-weight: bold">const</span> config: <span style="color: #333399; font-weight: bold">IConfig</span> <span
+                        style="color: #333333">=</span> {
     gridOpacity: <span style="color: #333399; font-weight: bold">.3</span>,
-    taskBorderRadius<span style="color: #333333">:</span> [<span style="color: #0000DD; font-weight: bold">5</span>,<span style="color: #0000DD; font-weight: bold">10</span>,<span style="color: #0000DD; font-weight: bold">10</span>,<span style="color: #0000DD; font-weight: bold">5</span>],
-    taskDefaultColor<span style="color: #333333">:</span> <span style="background-color: #fff0f0">&#39;purple&#39;</span>,
+    taskBorderRadius<span style="color: #333333">:</span> [<span
+                        style="color: #0000DD; font-weight: bold">5</span>,<span
+                        style="color: #0000DD; font-weight: bold">10</span>,<span
+                        style="color: #0000DD; font-weight: bold">10</span>,<span
+                        style="color: #0000DD; font-weight: bold">5</span>],
+    taskDefaultColor<span style="color: #333333">:</span> <span
+                        style="background-color: #fff0f0">&#39;purple&#39;</span>,
     taskHeight: <span style="color: #333399; font-weight: bold">20</span>,
     taskDayWidth: <span style="color: #333399; font-weight: bold">60</span>,
     taskVPadding: <span style="color: #333399; font-weight: bold">10</span>,
@@ -271,12 +357,37 @@ gantt.init(data);
 };
 
 gantt2.init(data, config);
-</pre></div>
+</pre>
+            </div>
 
-    </div>
-    <div class="chart" id="chart2">
+        </div>
+        <div class="chart" id="chart2">
 
-    </div>
-</section>
+        </div>
+    </section>
+</div>
+<footer>
+    <section class="container">
+        <div class="footer-content">
+            <div>&copy; Dmitry Porotov</div>
+            <div>
+                Licensed under LGPL 3.0
+            </div>
+        </div>
+        <div class="footer-content">
+            <section class="links">
+                    <a href="https://github.com/DmitryPorotov/gantt2" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" height="32" viewBox="0 0 16 16" version="1.1" width="32">
+                        <path fill="#000" d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+                    </svg></a>
+                    <a href="https://www.npmjs.com/package/gantt2" target="_blank">
+                        <svg width="32" height="32" viewBox="0 0 27.23 27.23">
+                            <rect fill="#333333" width="27.23" height="27.23" rx="2"></rect>
+                            <polygon fill="#fff" points="5.8 21.75 13.66 21.75 13.67 9.98 17.59 9.98 17.58 21.76 21.51 21.76 21.52 6.06 5.82 6.04 5.8 21.75"></polygon>
+                        </svg>
+                    </a>
+            </section>
+        </div>
+    </section>
+</footer>
 </body>
 </html>
