@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <title>Gantt2 - a Gannt chart library</title>
     <link rel="stylesheet" href="style.css" type="text/css">
 </head>
@@ -11,13 +12,21 @@
         <div class="header-content">
             <h1>Gantt2</h1>
         </div>
-        <div class="header-content">
-            <nav>
-                <span><a href="#install">Installation</a></span>
-                <span><a href="#data-format">Data format</a></span>
-                <span><a href="#example-data">Example data</a></span>
-                <span><a href="#example-usage">Usage</a></span>
-                <span><a href="#config">Configuration</a></span>
+        <div class="header-content nav-container">
+            <div class="menu-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav class="hide">
+                <ul>
+                    <li><a href="#install">Installation</a></li>
+                    <li><a href="#data-format">Data format</a></li>
+                    <li><a href="#example-data">Example data</a></li>
+                    <li><a href="#example-usage">Usage</a></li>
+                    <li><a href="#config">Configuration</a></li>
+                    <li><a href="#cred" class="mobile-only">Credits and Links</a></li>
+                </ul>
             </nav>
         </div>
     </section>
@@ -382,7 +391,7 @@ gantt2.init(data, config);
         </div>
     </section>
 </div>
-<footer>
+<footer id="cred">
     <section class="container">
         <div class="footer-content">
             <div>&copy; Dmitry Porotov</div>

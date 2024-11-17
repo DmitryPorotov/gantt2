@@ -2,6 +2,14 @@ import {Gantt2} from '../src'
 import {ITask} from "../src/data/task.interface";
 import {IConfig} from "../src/config/config.interface";
 
+
+const menuButton = document.querySelector('.menu-button') as HTMLDivElement;
+const navMenu = document.querySelector('.header-content nav') as HTMLDivElement;
+menuButton.addEventListener('click', () => {
+    navMenu.classList.toggle('hide');
+    menuButton.classList.toggle('open');
+});
+
 const navs = window.document.querySelectorAll('a[href^="#"]');
 for (const n of navs) {
     n.addEventListener('click', (evt) => {
@@ -11,6 +19,9 @@ for (const n of navs) {
         const id = el.href.split('#')[1];
         const navTarget = window.document.getElementById(id);
         if (navTarget) navTarget.scrollIntoView({ behavior: "smooth", inline: "nearest" });
+
+        navMenu.classList.add('hide');
+        menuButton.classList.remove('open');
     })
 }
 
@@ -195,3 +206,4 @@ const config: IConfig = {
 };
 
 gantt2.init(data, config);
+
