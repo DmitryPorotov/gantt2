@@ -1,7 +1,6 @@
-import Task from "../../data/task";
 import SVGElementWrapper from "./utils/svg-element-wrapper";
 import Utils from "./utils/utils";
-import {Config} from "../../config/config-parser";
+import {Config, Task} from "../..";
 
 export default class SvgTask {
     private elem?: SVGElementWrapper;

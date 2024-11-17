@@ -1,7 +1,21 @@
-import {ITask} from "./task.interface";
-import {IDependency} from "./dependency.interface";
+import {IDependency} from "./dependency";
 
-export default class Task implements ITask {
+export interface ITask {
+    id: number;
+    name: string;
+    complete?: number;
+    color?: string;
+    meeting?: boolean;
+    expand?: boolean;
+    start: Date | string;
+    duration: number;
+    tasks?: ITask[];
+    depend?: IDependency[];
+    totalDescendants?: number;
+}
+
+
+export class Task implements ITask {
     constructor(
         public id: number,
         public name: string,

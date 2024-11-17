@@ -1,8 +1,6 @@
-import {ITask} from "./task.interface";
-import Task from "./task";
-import {IDependency} from "./dependency.interface";
-import Dependency from "./dependency";
-import {Config} from "../config/config-parser";
+import {ITask, Task} from "./task";
+import {IDependency, Dependency} from "./dependency";
+import {Config} from "..";
 
 export interface ParsedData {
     tasks: Task[]

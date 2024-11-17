@@ -1,11 +1,8 @@
 import SVGElementWrapper from "./utils/svg-element-wrapper";
 import Utils from "./utils/utils";
-import Task from "../../data/task";
-import {ParsedData} from "../../data/data-parser";
+import {ParsedData, Dependency, Config, Task} from "../..";
 import SvgTask from "./svg-task";
-import {Config} from "../../config/config-parser";
 import Grid from "../grid";
-import Dependency from "../../data/dependency";
 import SvgDependency from "./svg-dependency";
 import SvgGrid from "./svg-grid";
 

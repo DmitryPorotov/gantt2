@@ -1,6 +1,4 @@
-import {Gantt2} from '../src'
-import {ITask} from "../src/data/task.interface";
-import {IConfig} from "../src/config/config.interface";
+import {Gantt2, ITask, IConfig} from '../src'
 
 
 const menuButton = document.querySelector('.menu-button') as HTMLDivElement;

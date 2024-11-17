@@ -1,4 +1,4 @@
-import {ITask} from "../../src/data/task.interface";
+import {ITask} from "../../src";
 
 export const tasks: ITask[] = [
   {

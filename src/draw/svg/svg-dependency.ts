@@ -1,6 +1,4 @@
-import Dependency from "../../data/dependency";
-import {Config} from "../../config/config-parser";
-import {DependencyType} from "../../data/dependency-type.enum";
+import {Dependency, Config, DependencyType} from "../..";
 import SvgTask from "./svg-task";
 import Utils from "./utils/utils";
 import SVGElementWrapper from "./utils/svg-element-wrapper";

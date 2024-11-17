@@ -1,6 +1,4 @@
-import {ParsedData} from "../data/data-parser";
-import {Config} from "../config/config-parser";
-import Task from "../data/task";
+import {Config, ParsedData, Task} from "..";
 import Utils from "./svg/utils/utils";
 
 export default class Grid {

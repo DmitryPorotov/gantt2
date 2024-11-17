@@ -1,6 +1,5 @@
-import ConfigParser from './config/config-parser';
-import {ITask} from "./data/task.interface";
-import {IConfig} from "./config/config.interface";
+import ConfigParser, {IConfig} from './config/config-parser';
+import {ITask} from "./data/task";
 import SvgRoot from "./draw/svg/svg-root";
 import DataParser from "./data/data-parser";
 import Grid from "./draw/grid";
@@ -31,3 +30,8 @@ export class Gantt2 {
         this.elem.appendChild(svg.element)
     }
 }
+
+export * from './config/config-parser';
+export * from './data/data-parser';
+export * from './data/dependency';
+export * from './data/task';

@@ -1,5 +1,5 @@
 import Grid from "../grid";
-import {Config} from "../../config/config-parser";
+import {Config} from "../..";
 import SVGElementWrapper from "./utils/svg-element-wrapper";
 import Utils from "./utils/utils";
 

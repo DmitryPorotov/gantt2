@@ -1,6 +1,6 @@
 {
   "name": "gantt2",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A browser library to draw Gantt charts",
   "main": "prod/index.js",
   "scripts": {
@@ -17,7 +17,9 @@
   "files": [
     "prod",
     "readme.md",
-    "package.json"
+    "package.json",
+    "index.ts",
+    "index.js"
   ],
   "keywords": [
     "gantt",
