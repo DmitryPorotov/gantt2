@@ -1,8 +1,8 @@
-import SVGElementWrapper from "./svg-element-wrapper";
+import {SVGElementWrapper} from "./svg-element-wrapper";
 
 export type SvgElementName = "svg" | "g" | "text" | "path" | "title";
 
-export default class Utils {
+export class Utils {
     public static SVG_NS: 'http://www.w3.org/2000/svg' = 'http://www.w3.org/2000/svg';
 
     public static createElement(name: SvgElementName): SVGElementWrapper {

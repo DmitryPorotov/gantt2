@@ -1,4 +1,4 @@
-export default class SVGElementWrapper {
+export class SVGElementWrapper {
     private readonly proxy;
     public constructor(public element: SVGElement) {
         this.proxy = new Proxy(this, {

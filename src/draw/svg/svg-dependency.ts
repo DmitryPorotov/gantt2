@@ -1,9 +1,9 @@
 import {Dependency, Config, DependencyType} from "../..";
-import SvgTask from "./svg-task";
-import Utils from "./utils/utils";
-import SVGElementWrapper from "./utils/svg-element-wrapper";
+import {SvgTask} from "./svg-task";
+import {Utils} from "./utils/utils";
+import {SVGElementWrapper} from "./utils/svg-element-wrapper";
 
-export default class SvgDependency {
+export class SvgDependency {
     constructor(private dependency: Dependency, private dependOnTask: SvgTask) {
     }
 

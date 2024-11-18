@@ -1,12 +1,12 @@
-import SVGElementWrapper from "./utils/svg-element-wrapper";
-import Utils from "./utils/utils";
+import {SVGElementWrapper} from "./utils/svg-element-wrapper";
+import {Utils} from "./utils/utils";
 import {ParsedData, Dependency, Config, Task} from "../..";
-import SvgTask from "./svg-task";
-import Grid from "../grid";
-import SvgDependency from "./svg-dependency";
-import SvgGrid from "./svg-grid";
+import {SvgTask} from "./svg-task";
+import {Grid} from "../grid";
+import {SvgDependency} from "./svg-dependency";
+import {SvgGrid} from "./svg-grid";
 
-export default class SvgRoot {
+export class SvgRoot {
     private elem?: SVGElementWrapper;
     private svgTasks: SvgTask[] = [];
     private svgGrid?: SvgGrid;

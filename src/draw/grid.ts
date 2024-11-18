@@ -1,7 +1,7 @@
 import {Config, ParsedData, Task} from "..";
-import Utils from "./svg/utils/utils";
+import {Utils} from "./svg/utils/utils";
 
-export default class Grid {
+export class Grid {
     notches: Map<number, number> = new Map();
     fullWidth: number = -1;
     private _holidays: Map<number, string> = new Map<number, string>();

@@ -8,7 +8,7 @@ export interface ParsedData {
     startDate: Date
 }
 
-export default class DataParser {
+export class DataParser {
     private static _config: Config;
     private static _totalTasks: number = 0;
     private static _startDate?: Date;

@@ -30,7 +30,7 @@ export interface IConfig {
 
 export type Config = {[key in keyof IConfig]-? : IConfig[key]}
 
-export default class ConfigParser {
+export class ConfigParser {
     static parse(cfg?: IConfig): Config {
         if (cfg && cfg.timelineDayNumbersForMonthDates && cfg.timelineDayNumbersForWeekdays)
             throw new Error("Either timelineDayNumbersForMonthDates or timelineDayNumbersForWeekdays can be defined.");

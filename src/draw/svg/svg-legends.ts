@@ -1,9 +1,9 @@
-import Grid from "../grid";
+import {Grid} from "../grid";
 import {Config} from "../..";
-import SVGElementWrapper from "./utils/svg-element-wrapper";
-import Utils from "./utils/utils";
+import {SVGElementWrapper} from "./utils/svg-element-wrapper";
+import {Utils} from "./utils/utils";
 
-export default class SvgLegends {
+export class SvgLegends {
     elem: SVGElementWrapper;
     constructor(private grid: Grid, private width: number, private conf: Config) {
         this.elem = Utils.createElement('svg');
