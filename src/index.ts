@@ -8,8 +8,13 @@ import {SvgLegends} from "./draw/svg/svg-legends";
 export class Gantt2 {
     private _totalHeight?: number;
     private _totalWidth?: number;
+    private readonly container: HTMLDivElement;
     constructor(private elem: HTMLElement) {
-
+        this.container = document.createElement('div');
+        this.elem.appendChild(this.container);
+        this.container.style.display = 'grid';
+        this.container.style.height = '100%';
+        this.container.style.width = '100%';
     }
 
     getTotalHeight(): number {
@@ -35,12 +40,26 @@ export class Gantt2 {
         svg.setAttrib_("width", String(this._totalWidth))
             .setAttrib_('height', String(this._totalHeight))
             .setAttrib_('style', 'display:block;');
+
+        const chartContainer = window.document.createElement('div');
+        chartContainer.style.overflow = 'auto';
+        chartContainer.classList.add('gantt-chart-container');
+        chartContainer.appendChild(svg.element);
+
         if (parsedConfig.showLegends) {
             const legends = new SvgLegends(grid, this._totalWidth, parsedConfig);
-            this.elem.appendChild(legends.buildElem().setAttrib_('style', 'display:block;').element)
+            this.container.appendChild(legends.buildElem());
+            chartContainer.addEventListener('scroll', legends.scrollEventHandler);
         }
-        this.elem.appendChild(svg.element);
+
+
+
+        this.container.appendChild(chartContainer);
         return parsedData;
+    }
+
+    setChartScrollEventHandler(evtHandler: (evt:Event) => void) {
+        (this.container.querySelector('.gantt-chart-container') as HTMLDivElement).addEventListener('scroll', evtHandler)
     }
 }
 

@@ -5,10 +5,14 @@ import {Utils} from "./utils/utils";
 
 export class SvgLegends {
     elem: SVGElementWrapper;
+    container: HTMLDivElement;
     constructor(private grid: Grid, private width: number, private conf: Config) {
         this.elem = Utils.createElement('svg');
+        this.container = document.createElement('div');
+        this.container.appendChild(this.elem.element);
+        this.container.style.overflow = 'hidden';
     }
-    buildElem(): SVGElementWrapper {
+    buildElem(): HTMLDivElement {
         const monthStarts: {x: number, date: Date}[] = [];
         for (const d of this.grid.notches.keys()) {
             const date = new Date(d);
@@ -42,7 +46,7 @@ export class SvgLegends {
         this.elem.setAttrib_('height', String(this.conf.timelineLegendHeight))
             .setAttrib_('width', String(this.width))
             .setAttrib_('class', this.conf.timelineLegendCssClass);
-        return this.elem;
+        return this.container;
     }
 
     private buildMonthLegend(date: Date, x: number) {
@@ -52,5 +56,9 @@ export class SvgLegends {
             .setAttrib_('y', String(this.conf.timelineLegendHeight/3)) as unknown as SVGTextElement;
         text.innerHTML = `${date.getMonth() + 1}/${date.getFullYear()}`;
         this.elem.appChild_(text);
+    }
+
+    scrollEventHandler = (evt: Event) => {
+        this.container.scrollLeft = (evt.target as HTMLDivElement).scrollLeft;
     }
 }

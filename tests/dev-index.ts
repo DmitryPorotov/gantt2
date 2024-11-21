@@ -3,11 +3,11 @@ import {tasks2} from "./mock-data/data2";
 import {tasks} from "./mock-data/data1";
 
 const chart = new Gantt2(document.getElementById('chart') as HTMLElement);
-chart.init(tasks,{
+chart.init(tasks2,{
     showTaskNames: true,
     taskStrokeWidth: 1,
     taskHeight: 30,
-    taskDayWidth: 20,
+    taskDayWidth: 60,
     taskVPadding: 15,
     addTaskTitles: true,
     taskBorderRadius: 0,
@@ -19,5 +19,5 @@ chart.init(tasks,{
     dependencyArrowSize: 12,
     timelineLegendHeight: 60,
     // timelineDayNumbersForWeekdays: [1],
-    timelineDayNumbersForMonthDates: [1, 15]
+    // timelineDayNumbersForMonthDates: [1, 15]
 });
