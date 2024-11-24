@@ -16,7 +16,7 @@
   },
   "files": [
     "prod",
-    "readme.md",
+    "README.md",
     "package.json",
     "index.ts",
     "index.js"
@@ -28,7 +28,7 @@
     "browser"
   ],
   "author": "Dmitry Porotov",
-  "license": "LGPL-3.0-or-later",
+  "license": "LGPL-2.0-or-later",
   "bugs": {
     "url": "https://github.com/DmitryPorotov/gantt2/issues"
   },

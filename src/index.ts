@@ -52,8 +52,6 @@ export class Gantt2 {
             chartContainer.addEventListener('scroll', legends.scrollEventHandler);
         }
 
-
-
         this.container.appendChild(chartContainer);
         return parsedData;
     }
