@@ -1,12 +1,12 @@
 {
   "name": "gantt2",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A browser library to draw Gantt charts",
   "main": "prod/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "watch": "webpack --watch",
+    "watch": "rm -rf ./dist && webpack --watch",
     "build:prod": "webpack -c npm.webpack.config.js",
     "build:docs": "webpack -c gh-page.webpack.config.js"
   },

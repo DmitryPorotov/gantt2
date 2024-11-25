@@ -10,7 +10,14 @@ export class Grid {
     }
 
     calcNotches() {
-        this.calcNotchesForTasks(this.parsedData.tasks);
+        if (this.parsedData.tasks.length) {
+            this.calcNotchesForTasks(this.parsedData.tasks);
+        }
+        else {
+            const now = new Date();
+            const today = new Date(`${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`);
+            this.calcNotchesForTasks([new Task(1, '', today, Utils.addDay(today, 10), 10, 0, '', [], true, false, [], 0)]);
+        }
         let sortedKeys: number[] = [];
         for (const k of this.notches.keys()) {
             sortedKeys.push(k);

@@ -16,12 +16,12 @@ export class SvgRoot {
     constructor(private grid: Grid,private conf: Config) {
         this.currentOffsetY = conf.taskVPadding * (conf.showTaskNames ? 2 : 1);
     }
-    buildElem(data: ParsedData): SVGElementWrapper {
+    buildElem(data: ParsedData, totalHeight: number): SVGElementWrapper {
         this.elem = Utils.createElement("svg");
         this.startDate = data.startDate;
         this.drawTasks(data.tasks);
         this.drawDependencies();
-        this.drawGrid();
+        this.drawGrid(totalHeight);
         return this.elem;
     }
 
@@ -65,10 +65,9 @@ export class SvgRoot {
         throw new Error(`Task with id ${id} was not found.`);
     }
 
-    private drawGrid() {
+    private drawGrid(totalHeight: number) {
         if (!this.conf.showGrid) return;
-        const height = this.svgTasks.length * (this.conf.taskHeight + (2 * (this.conf.taskVPadding)));
-        this.svgGrid = new SvgGrid(this.grid, height);
+        this.svgGrid = new SvgGrid(this.grid, totalHeight);
         this.elem?.prepChild_(this.svgGrid.buildElem(this.conf));
     }
 }
