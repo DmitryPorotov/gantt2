@@ -4,11 +4,11 @@ import {SVGElementWrapper} from "./utils/svg-element-wrapper";
 import {Utils} from "./utils/utils";
 
 export class SvgGrid {
-    elem: SVGElementWrapper;
+    elem: SVGElementWrapper<'g'>;
     constructor(private grid: Grid, private totalHeight: number) {
         this.elem = Utils.createElement('g');
     }
-    buildElem(conf: Config): SVGElementWrapper {
+    buildElem(conf: Config) {
         for (const n of this.grid.notches.keys()) {
             const date = new Date(n);
             const x = this.grid.notches.get(n);

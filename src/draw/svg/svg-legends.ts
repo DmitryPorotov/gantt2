@@ -4,7 +4,7 @@ import {SVGElementWrapper} from "./utils/svg-element-wrapper";
 import {Utils} from "./utils/utils";
 
 export class SvgLegends {
-    elem: SVGElementWrapper;
+    elem: SVGElementWrapper<'svg'>;
     container: HTMLDivElement;
     constructor(private grid: Grid, private width: number, private conf: Config) {
         this.elem = Utils.createElement('svg');
@@ -29,7 +29,7 @@ export class SvgLegends {
             ) {
                 const text = Utils.createElement('text')
                     .setAttrib_('x', String(this.grid.notches.get(d)))
-                    .setAttrib_('y', `${this.conf.timelineLegendHeight - 10}`) as unknown as SVGTextElement;
+                    .setAttrib_('y', `${this.conf.timelineLegendHeight - 10}`);
                 text.innerHTML = String(date.getDate());
                 this.elem.appChild_(text);
             }
@@ -53,7 +53,7 @@ export class SvgLegends {
         const text = Utils.createElement('text')
             .setAttrib_('font-weight',"bold")
             .setAttrib_('x', String(this.grid.notches.get(x)))
-            .setAttrib_('y', String(this.conf.timelineLegendHeight/3)) as unknown as SVGTextElement;
+            .setAttrib_('y', String(this.conf.timelineLegendHeight/3));
         text.innerHTML = `${date.getMonth() + 1}/${date.getFullYear()}`;
         this.elem.appChild_(text);
     }

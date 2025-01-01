@@ -22,7 +22,7 @@ export class DataParser {
         DataParser._startDate = undefined;
         const {tasks: t} = DataParser._parseTasks(tasks);
         return {
-            startDate: this._startDate as Date,
+            startDate: this._startDate!,
             tasks: t,
             total: this._totalTasks
         };
@@ -48,7 +48,7 @@ export class DataParser {
                 new Date(0),
                 task.duration,
                 task.complete ?? 0,
-                task.color ?? DataParser._config.taskDefaultColor as string,
+                task.color ?? DataParser._config.taskDefaultColor!,
                 task.depend ? DataParser._parseDeps(task.depend) : [],
                 task.expand ?? true,
                 task.meeting ?? false,

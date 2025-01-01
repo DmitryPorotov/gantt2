@@ -27,13 +27,13 @@ export class Grid {
         this.notches.set(sortedKeys[0], 1);
         for (let i = 0; i < sortedKeys.length - 1; i++) {
             if (this.isWeekendOrHoliday(new Date(sortedKeys[i]))) {
-                this.notches.set(sortedKeys[i+1], this.notches.get(sortedKeys[i]) as number + this.conf.taskHolidayWidth);
+                this.notches.set(sortedKeys[i+1], this.notches.get(sortedKeys[i])! + this.conf.taskHolidayWidth);
             }
             else {
-                this.notches.set(sortedKeys[i+1], this.notches.get(sortedKeys[i]) as number + this.conf.taskDayWidth);
+                this.notches.set(sortedKeys[i+1], this.notches.get(sortedKeys[i])! + this.conf.taskDayWidth);
             }
         }
-        this.fullWidth = this.notches.get(sortedKeys[sortedKeys.length - 1]) as number;
+        this.fullWidth = this.notches.get(sortedKeys[sortedKeys.length - 1])!;
     }
 
     private calcNotchesForTasks(tasks: Task[]) {

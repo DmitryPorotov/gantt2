@@ -7,7 +7,7 @@ export class SvgDependency {
     constructor(private dependency: Dependency, private dependOnTask: SvgTask) {
     }
 
-    buildElem(parentTask: SvgTask, conf: Config): SVGElementWrapper {
+    buildElem(parentTask: SvgTask, conf: Config): SVGElementWrapper<'g'> {
         let startX: number,
             endX: number,
             doHook = false;

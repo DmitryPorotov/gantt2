@@ -7,7 +7,7 @@ import {SvgDependency} from "./svg-dependency";
 import {SvgGrid} from "./svg-grid";
 
 export class SvgRoot {
-    private elem?: SVGElementWrapper;
+    private elem?: SVGElementWrapper<'svg'>;
     private svgTasks: SvgTask[] = [];
     private svgGrid?: SvgGrid;
     private currentOffsetY: number = 0;
@@ -16,8 +16,8 @@ export class SvgRoot {
     constructor(private grid: Grid,private conf: Config) {
         this.currentOffsetY = conf.taskVPadding * (conf.showTaskNames ? 2 : 1);
     }
-    buildElem(data: ParsedData, totalHeight: number): SVGElementWrapper {
-        this.elem = Utils.createElement("svg");
+    buildElem(data: ParsedData, totalHeight: number) {
+        this.elem = Utils.createElement('svg');
         this.startDate = data.startDate;
         this.drawTasks(data.tasks);
         this.drawDependencies();
@@ -28,8 +28,8 @@ export class SvgRoot {
     private drawTasks(tasks: Task[]) {
         for (const t of tasks) {
             const svgTask = new SvgTask(t);
-            const offsetX = this.grid.notches.get((t.start as Date).getTime()) as number;
-            const endX = this.grid.notches.get((t.end as Date).getTime()) as number;
+            const offsetX = this.grid.notches.get((t.start as Date).getTime())!;
+            const endX = this.grid.notches.get((t.end as Date).getTime())!;
             svgTask.setOffset(offsetX, this.currentOffsetY);
             svgTask.setEndX(endX);
             this.elem?.appChild_(svgTask.buildElem(this.conf));

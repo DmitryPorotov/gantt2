@@ -1,6 +1,8 @@
-export class SVGElementWrapper {
-    private readonly proxy;
-    public constructor(public element: SVGElement) {
+import {SvgElements} from "./svg-elements";
+
+export class SVGElementWrapper<K extends keyof SvgElements> {
+    private readonly proxy: SVGElementWrapper<K> & SvgElements[K];
+    public constructor(public element: SvgElements[K]) {
         this.proxy = new Proxy(this, {
             get: (proxy, name: PropertyKey) => {
                 if (this.hasOwnProperty(name)) {
@@ -20,10 +22,10 @@ export class SVGElementWrapper {
                 proxy.element[name] = value;
                 return true;
             }
-        });
+        }) as unknown as SVGElementWrapper<K> & SvgElements[K];
         return this.proxy;
     }
-    public appChild_(child: SVGElement | SVGElementWrapper): SVGElementWrapper {
+    public appChild_(child: SVGElement | SVGElementWrapper<keyof SvgElements>) {
         if (child instanceof SVGElement) {
             this.element.appendChild(child);
         } else {
@@ -32,7 +34,7 @@ export class SVGElementWrapper {
         return this.proxy;
     }
 
-    public prepChild_(child: SVGElement | SVGElementWrapper): SVGElementWrapper {
+    public prepChild_(child: SVGElement | SVGElementWrapper<keyof SvgElements>) {
         if (child instanceof SVGElement) {
             this.element.insertBefore(child, this.element.childNodes[0]);
         } else {
@@ -41,7 +43,7 @@ export class SVGElementWrapper {
         return this.proxy;
     }
 
-    public setAttrib_(attr: string, value: string): SVGElementWrapper {
+    public setAttrib_(attr: string, value: string) {
         this.element.setAttribute(attr, value);
         return this.proxy;
     }

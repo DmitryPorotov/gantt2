@@ -3,7 +3,7 @@ import {Utils} from "./utils/utils";
 import {Config, Task} from "../..";
 
 export class SvgTask {
-    private elem?: SVGElementWrapper;
+    private elem?: SVGElementWrapper<"g">;
     constructor(private task: Task) {
     }
 
@@ -36,7 +36,7 @@ export class SvgTask {
         return this.task.id
     }
 
-    buildElem(conf: Config): SVGElementWrapper {
+    buildElem(conf: Config) {
         this.elem = Utils.createElement("g").setAttrib_('class', conf.taskCssClass);
         const task = Utils.createElement('path')
             .setAttrib_('fill', this.task.color);
@@ -47,8 +47,8 @@ export class SvgTask {
                 + `H${this.offsetX + 7}l-7 ${conf.taskHeight/2 -2}z`);
         }
         else {
-            task.setAttrib_('stroke', conf.taskStrokeColor as string)
-                .setAttrib_('stroke-width', String(conf.taskStrokeWidth as number));
+            task.setAttrib_('stroke', conf.taskStrokeColor!)
+                .setAttrib_('stroke-width', String(conf.taskStrokeWidth!));
             if (conf.taskBorderRadius) {
                 const br = conf.taskBorderRadius as number[];
                 const brTL = Math.min(br[0], conf.taskHeight / 2),
@@ -74,7 +74,7 @@ export class SvgTask {
             this.addName();
         }
         if (conf.addTaskTitles) {
-            const title = Utils.createElement("title") as unknown as SVGTitleElement;
+            const title = Utils.createElement("title");
             title.innerHTML = `${this.task.name}
    Starts ${this.task.start.toLocaleString()}
    Ends ${Utils.addDay(this.task.end, -1).toLocaleString()}
@@ -89,10 +89,10 @@ export class SvgTask {
     }
 
     private addName() {
-        const text: SVGTextElement = Utils.createElement('text')
+        const text = Utils.createElement('text')
             .setAttrib_('class', 'gantt-task-name')
             .setAttrib_('dx', String(this.offsetX))
-            .setAttrib_('dy', String(this.offsetY -4)) as unknown as SVGTextElement;
+            .setAttrib_('dy', String(this.offsetY -4));
         text.innerHTML = this.task.name;
         this.elem?.appChild_(text);
     }
